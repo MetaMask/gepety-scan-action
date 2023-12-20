@@ -14,10 +14,26 @@ runs:
       with:
         repository: MetaMask/gepety-scan-action
         path: scanner
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Install dependencies
+      working-directory: ${{github.action_path}}
+      run: yarn --immutable
+      shell: bash
+
+    - name: Build
+      working-directory: ${{github.action_path}}
+      run: yarn build
+      shell: bash
+
     - name: Execute
       id: execute
       run: |
-        node $GITHUB_WORKSPACE/scanner/scripts/entrypoint.js
+        node ${{github.action_path}}/dist/entrypoint.js
       shell: bash
       env:
         REPO_NAME: ${{ inputs.repo-name }}

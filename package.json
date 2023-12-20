@@ -1,8 +1,8 @@
 {
   "name": "gepety-scan-action",
   "scripts": {
-    "start": "tsc && node dist/entrypoint.js",
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "tsc && node dist/entrypoint.dev.js"
   },
   "engines": {
     "node": "^18 || ^20 || ^22"
@@ -20,6 +20,7 @@
     "@types/node": "^20.10.5"
   },
   "devDependencies": {
+    "dotenv": "^16.3.1",
     "typescript": "^5.3.3"
   }
 }

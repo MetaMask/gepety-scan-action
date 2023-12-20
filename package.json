@@ -1,0 +1,14 @@
+{
+  "name": "gepety-scan-action",
+  "scripts": {
+    "start": "node scripts/entrypoint.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MetaMask/gepety-scan-action.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MetaMask/gepety-scan-action/issues"
+  },
+  "homepage": "https://github.com/MetaMask/gepety-scan-action#readme"
+}

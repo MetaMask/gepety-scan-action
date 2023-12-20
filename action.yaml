@@ -1,0 +1,15 @@
+name: 'Gepety Scan Action'
+description: 'Run GPT powered code analysis'
+runs:
+  using: 'composite' 
+  steps:
+    - name: Check out this action's repository
+      uses: actions/checkout@v4
+      with:
+        repository: MetaMask/gepety-scan-action
+        path: scanner
+    - name: Execute
+      id: execute
+      run: |
+        node $GITHUB_WORKSPACE/scanner/scripts/entrypoint.js
+      shell: bash

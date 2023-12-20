@@ -1,5 +1,11 @@
 name: 'Gepety Scan Action'
 description: 'Run GPT powered code analysis'
+inputs:
+  repo-name:
+    description: |
+      Repository name. 
+      This must match the path it is checked out in the GitHub Workspace'
+    required: true
 runs:
   using: 'composite' 
   steps:
@@ -13,3 +19,5 @@ runs:
       run: |
         node $GITHUB_WORKSPACE/scanner/scripts/entrypoint.js
       shell: bash
+      env:
+        REPO_NAME: ${{ inputs.repo-name }}

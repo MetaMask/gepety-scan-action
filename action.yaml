@@ -9,31 +9,29 @@ inputs:
 runs:
   using: 'composite' 
   steps:
-    - name: Check out this action's repository
-      uses: actions/checkout@v4
-      with:
-        repository: MetaMask/gepety-scan-action
-        path: scanner
-
+    ## This ensures that clients running gepety-scan-action@<somebranch>
+    ## will always use the branch specified
+    - name: Copy action into workspace
+      run: |
+        cd ${{ github.workspace }}
+        mkdir gepety-scan-action
+        cp -r ${{github.action_path}}/* ./gepety-scan-action
+      shell: bash
+      
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 20
 
-    - name: Install dependencies
-      working-directory: ${{github.action_path}}
-      run: yarn --immutable
-      shell: bash
-
-    - name: Build
-      working-directory: ${{github.action_path}}
-      run: yarn build
+    - name: Setup
+      working-directory: ./gepety-scan-action
+      run: yarn --immutable && yarn build
       shell: bash
 
     - name: Execute
-      id: execute
-      run: |
-        node ${{github.action_path}}/dist/entrypoint.js
-      shell: bash
-      env:
-        REPO_NAME: ${{ inputs.repo-name }}
+      uses: actions/github-script@v7
+      with:
+        action-path: ${{github.action_path}}
+        script: |   
+          const entrypoint = require('./gepety-scan-action/dist/entrypoint.js');
+          await entrypoint({ github, context});

@@ -31,9 +31,12 @@ jobs:
 
 ```
 
-## Running locally
+## Development
 
-You can run the script locally by executing `yarn start`. Note that you will need to pass in any environment variables normally passed in by the GitHub action when doing so.
+You can run the script locally by doing the following:
+1. Mocking the data in `entrypoint.dev.ts` so that it points towards another pull request you have access to
+2. Renaming `.env.example` to `.env` and providing your own token.
+3. Running `yarn dev`. 
 
 
 ## Disclaimer
